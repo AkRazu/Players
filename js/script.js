@@ -5,6 +5,7 @@ const allPlayers = () => {
     .then((response) => response.json())
     .then((data) => showPlayerDetails(data.player));
 };
+allPlayers();
 const showPlayerDetails = (players) => {
   const parent = document.getElementById("player-container");
   parent.textContent = "";
@@ -34,7 +35,6 @@ const showPlayerDetails = (players) => {
     }
   });
 };
-
 const details = (info) => {
   const url = `https://www.thesportsdb.com/api/v1/json/2/lookupplayer.php?id=${info}`;
   fetch(url)
@@ -43,28 +43,47 @@ const details = (info) => {
 };
 
 const setDetails = (id) => {
-  console.log(id);
+  //   console.log(id);
   const detailsContainer = document.getElementById("details-container");
+  const maleImage = document.getElementById("maleImage");
   detailsContainer.textContent = "";
-  const div = document.createElement("div");
-  div.innerHTML = `
-  <div class="card text-center">
+  if (id.strGender == "Male") {
+    document.getElementById("maleImage").style.display = "block";
+    document.getElementById("femaleImage").style.display = "none";
+    const div = document.createElement("div");
+    div.innerHTML = `
+  <div class="card text-center ">
                 <div class="card-header">
                 Team : ${id.strTeam}
                 </div>
-                <div>
-                    <img w-25 src="${
-                      id.strThumb
-                    }" class="card-img-top " alt="...">
-                </div>
                 <div class="card-body">
                   <h5 class="card-title">Name : ${id.strPlayer}</h5>
-                  <p class="card-text">${id.strDescriptionEN.slice(1, 300)}</p>
+                  <p class="card-text">${id.strDescriptionEN.slice(0, 250)}</p>
                 </div>
                 <div class="card-footer text-muted">
                 Nationality : ${id.strNationality}
                 </div>
               </div>
     `;
-  detailsContainer.appendChild(div);
+    detailsContainer.appendChild(div);
+  } else {
+    const detailsContainer = document.getElementById("details-container");
+    document.getElementById("femaleImage").style.display = "block";
+    const div = document.createElement("div");
+    div.innerHTML = `
+  <div class="card text-center ">
+                <div class="card-header">
+                Team : ${id.strTeam}
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Name : ${id.strPlayer}</h5>
+                  <p class="card-text">${id.strDescriptionEN.slice(0, 250)}</p>
+                </div>
+                <div class="card-footer text-muted">
+                Nationality : ${id.strNationality}
+                </div>
+              </div>
+    `;
+    detailsContainer.appendChild(div);
+  }
 };
