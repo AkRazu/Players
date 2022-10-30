@@ -52,7 +52,7 @@ const setDetails = (id) => {
     document.getElementById("femaleImage").style.display = "none";
     const div = document.createElement("div");
     div.innerHTML = `
-  <div class="card text-center ">
+  <div class="card text-center position-relative top-50 start-50 me-2">
                 <div class="card-header">
                 Team : ${id.strTeam}
                 </div>
@@ -71,7 +71,7 @@ const setDetails = (id) => {
     document.getElementById("femaleImage").style.display = "block";
     const div = document.createElement("div");
     div.innerHTML = `
-  <div class="card text-center ">
+  <div class="card text-center position-relative top-50 start-50 me-2">
                 <div class="card-header">
                 Team : ${id.strTeam}
                 </div>
