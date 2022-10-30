@@ -1,12 +1,15 @@
 const allPlayers = () => {
+  document.getElementById("spinner").style.display = "block";
   const searchValue = document.getElementById("search-box").value;
   const url = `https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${searchValue}`;
   fetch(url)
     .then((response) => response.json())
     .then((data) => showPlayerDetails(data.player));
 };
-allPlayers();
 const showPlayerDetails = (players) => {
+    if(players){
+        document.getElementById('spinner').style.display='none';
+    }
   const parent = document.getElementById("player-container");
   parent.textContent = "";
   players.forEach((player) => {
