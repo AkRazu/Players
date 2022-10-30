@@ -7,9 +7,10 @@ const allPlayers = () => {
     .then((data) => showPlayerDetails(data.player));
 };
 const showPlayerDetails = (players) => {
-    if(players){
-        document.getElementById('spinner').style.display='none';
-    }
+  if (players) {
+    document.getElementById("spinner").style.display = "none";
+    document.getElementById("footer").style.display = "block";
+  }
   const parent = document.getElementById("player-container");
   parent.textContent = "";
   players.forEach((player) => {
