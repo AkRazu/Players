@@ -6,29 +6,32 @@ const allPlayers = () => {
     .then((data) => showPlayerDetails(data.player));
 };
 const showPlayerDetails = (players) => {
+  const parent = document.getElementById("player-container");
+  parent.textContent = "";
   players.forEach((player) => {
-    const parent = document.getElementById("player-container");
-    const div = document.createElement("div");
-    div.classList.add("col");
-    div.classList.add("my-3");
-    div.innerHTML = `
-    <div class="card text-center">
-                <div class="card-header">
-                  Featured
-                </div>
-                <div>
-                    <img w-50 src="${player.strThumb}" class="card-img-top " alt="...">
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                <div class="card-footer text-muted">
-                  2 days ago
-                </div>
-              </div>
-    `;
-    parent.appendChild(div);
+    if (player.strThumb !== null) {
+      const div = document.createElement("div");
+      div.classList.add("col");
+      div.classList.add("my-3");
+      div.innerHTML = `
+        <div class="card" style="width: 18rem;">
+        <img w-50 src="${player.strThumb}" class="card-img-top " alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Name: ${player.strPlayer}cool</h5>
+          <p class="card-text">Country: ${player.strNationality}</p>
+          <div class="allbutton ">
+            <button class="btn btn-danger">
+                Delete
+            </button>
+            <button onClick="details('${player.idPlayer}')" class="btn btn-success">
+                Details
+            </button>
+          </div>
+        </div>
+      </div>
+        `;
+      parent.appendChild(div);
+    }
   });
 };
 
@@ -46,18 +49,22 @@ const setDetails = (id) => {
   const div = document.createElement("div");
   div.innerHTML = `
   <div class="card text-center">
-  <div class="card-header">
-    Featured
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-  <div class="card-footer text-muted">
-    2 days ago
-  </div>
-</div>
+                <div class="card-header">
+                Team : ${id.strTeam}
+                </div>
+                <div>
+                    <img w-25 src="${
+                      id.strThumb
+                    }" class="card-img-top " alt="...">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Name : ${id.strPlayer}</h5>
+                  <p class="card-text">${id.strDescriptionEN.slice(1, 300)}</p>
+                </div>
+                <div class="card-footer text-muted">
+                Nationality : ${id.strNationality}
+                </div>
+              </div>
     `;
   detailsContainer.appendChild(div);
 };
