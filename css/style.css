@@ -4,6 +4,7 @@
 #spinner{
     display: none;
 }
-#footer{
+
+.error{
     display: none;
 }
